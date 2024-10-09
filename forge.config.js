@@ -24,6 +24,19 @@ module.exports = {
       config: {},
     },
   ],
+  publishers: [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: {
+          owner: 'rezafikkri',
+          name: 'test-build-electron-vite'
+        },
+        prerelease: false,
+        draft: true
+      }
+    }
+  ],
   plugins: [
     {
       name: '@electron-forge/plugin-vite',
