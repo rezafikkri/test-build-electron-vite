@@ -12,7 +12,7 @@ jobs:
       - name: Echo token
         shell: bash
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_PUBLISH }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: echo "TOKEN = $GITHUB_TOKEN"
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
