@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Echo token
-        run: echo ${{ vars.VAR_TOKEN_PUBLISH }}
+        run: echo "TOKEN = $GITHUB_TOKEN"
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
