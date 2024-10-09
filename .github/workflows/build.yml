@@ -8,11 +8,11 @@ jobs:
     
     runs-on: windows-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_PUBLISH }}
+      GITHUB_TOKEN: ${{ vars.VAR_TOKEN_PUBLISH }}
 
     steps:
       - name: Echo token
-        run: echo ${{ secrets.TOKEN_FOR_PUBLISH }}
+        run: echo ${{ vars.VAR_TOKEN_PUBLISH }}
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
