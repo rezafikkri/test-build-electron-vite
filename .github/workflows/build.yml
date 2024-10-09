@@ -12,8 +12,8 @@ jobs:
       - name: Echo token
         shell: bash
         env:
-          TOKEN: ${{ vars.VAR_TOKEN_PUBLISH }}
-        run: echo "TOKEN = $TOKEN"
+          GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_PUBLISH }}
+        run: echo "TOKEN = $GITHUB_TOKEN"
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
