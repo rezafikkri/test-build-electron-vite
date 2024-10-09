@@ -7,12 +7,13 @@ jobs:
   build:
     
     runs-on: windows-latest
-    env:
-      GITHUB_TOKEN: ${{ vars.VAR_TOKEN_PUBLISH }}
 
     steps:
       - name: Echo token
-        run: echo "TOKEN = $GITHUB_TOKEN"
+        shell: bash
+        env:
+          TOKEN: ${{ vars.VAR_TOKEN_PUBLISH }}
+        run: echo "TOKEN = $TOKEN"
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
