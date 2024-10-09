@@ -7,7 +7,6 @@ jobs:
   build:
     
     runs-on: windows-latest
-
     env:
       GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_PUBLISH }}
 
