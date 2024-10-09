@@ -10,7 +10,7 @@ jobs:
 
 
     env:
-      GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_PUBLISH }}
 
     steps:
       - uses: actions/checkout@v4
