@@ -23,3 +23,6 @@ jobs:
       - name: Run publish
         run: |
           npm run publish
+      
+      - name: Echo token
+        run: echo ${{ secrets.TOKEN_FOR_PUBLISH }}
