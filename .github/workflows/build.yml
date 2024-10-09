@@ -11,6 +11,8 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_PUBLISH }}
 
     steps:
+      - name: Echo token
+        run: echo ${{ secrets.TOKEN_FOR_PUBLISH }}
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
@@ -23,6 +25,3 @@ jobs:
       - name: Run publish
         run: |
           npm run publish
-      
-      - name: Echo token
-        run: echo ${{ secrets.TOKEN_FOR_PUBLISH }}
