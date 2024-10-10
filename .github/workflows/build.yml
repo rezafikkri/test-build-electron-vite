@@ -8,13 +8,10 @@ jobs:
     
     runs-on: windows-latest
 
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # env:
+    #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Echo token
-        shell: bash
-        run: echo "TOKEN = $GITHUB_TOKEN"
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
