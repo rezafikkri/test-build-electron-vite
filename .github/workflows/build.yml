@@ -21,10 +21,13 @@ jobs:
       - name: Clean install dependencies
         run: npm ci
 
+      - name: Buil
+        run: npm run make
+
       - name: see artifact
         run: |
           D:
-          cd \a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows
+          cd \a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64
           dir
 
       - uses: actions/upload-artifact@v4
