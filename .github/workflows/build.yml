@@ -24,7 +24,7 @@ jobs:
       - name: see artifact
         run: |
           D:
-          cd \a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64
+          cd \a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows
           dir
 
       - uses: actions/upload-artifact@v4
