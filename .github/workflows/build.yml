@@ -62,12 +62,12 @@ jobs:
       
       - name: Show Variable
         shell: powershell
-        run: echo $env:APP_VERSION
+        run: echo $APP_VERSION
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: $env:APP_VERSION
+          tag_name: $APP_VERSION
           draft: true
           files: |
             out/make/deb/x64/test-build-electron-vite*.deb
