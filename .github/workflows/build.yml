@@ -57,11 +57,11 @@ jobs:
         shell: powershell
         run: |
           $package = Get-Content 'package.json' | Out-String | ConvertFrom-Json
-          echo "APP_VERSION=$package.version" >> $GITHUB_ENV
+          echo "APP_VERSION=$package.version" >> $env:GITHUB_ENV
       
       - name: Show Variable
-        shell: bash
-        run: echo $APP_VERSION
+        shell: powershell
+        run: echo $env:APP_VERSION
 
       # - name: Release
       #   uses: softprops/action-gh-release@v2
