@@ -37,18 +37,6 @@ jobs:
   build-and-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Clean install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run make
-
       - name: create dir
         run: |
           cd /home/runner/work/test-build-electron-vite/test-build-electron-vite/out/make
@@ -60,3 +48,15 @@ jobs:
 
       - name: Display structure of downloaded files
         run: ls -R
+
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Clean install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run make
