@@ -57,18 +57,20 @@ jobs:
         shell: powershell
         run: |
           $package = Get-Content 'package.json' | Out-String | ConvertFrom-Json
-          echo "APP_VERSION=$package.version" >> $env:GITHUB_ENV
+          $version = $package.version
+          echo "APP_VERSION=$version" >> $env:GITHUB_ENV
       
       - name: Show Variable
         shell: powershell
         run: echo $env:APP_VERSION
 
-      # - name: Release
-      #   uses: softprops/action-gh-release@v2
-      #   with:
-      #     draft: true
-      #     files: |
-      #       out/make/deb/x64/test-build-electron-vite*.deb
-      #       out/make/squirrel.windows/x64/RELEASES
-      #       out/make/squirrel.windows/x64/test-build-electron-vite*.exe
-      #       out/make/squirrel.windows/x64/test_build_electron_vite*.nupkg
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: $env:APP_VERSION
+          draft: true
+          files: |
+            out/make/deb/x64/test-build-electron-vite*.deb
+            out/make/squirrel.windows/x64/RELEASES
+            out/make/squirrel.windows/x64/test-build-electron-vite*.exe
+            out/make/squirrel.windows/x64/test_build_electron_vite*.nupkg
