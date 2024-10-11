@@ -9,8 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\"",
-    "see-artifact-dir": "node ./see-artifact-dir.js"
+    "lint": "echo \"No linting configured\""
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.5.0",
