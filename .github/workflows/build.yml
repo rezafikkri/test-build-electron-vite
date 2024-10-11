@@ -37,11 +37,11 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: windows-build
+          name: test_build_electron_vite_windows
           path: |
-            D:\a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\test-build-electron-vite*.exe
-            D:\a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\test-build-electron-vite*.nupkg
-            D:\a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\RELEASES
+            \a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\test-build-electron-vite*.exe
+            \a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\test-build-electron-vite*.nupkg
+            \a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\RELEASES
 
   build-and-release:
     runs-on: ubuntu-latest
@@ -60,9 +60,14 @@ jobs:
       - name: Build
         run: npm run make
 
+      - name: create dir
+        run: |
+          cd /home/runner/work/test-build-electron-vite/test-build-electron-vite/out/make
+          mkdir -p squirrel.windows/x64
+
       - uses: actions/download-artifact@v4
         with:
-          name: windows-build
+          name: test_build_electron_vite_windows
           path: /home/runner/work/test-build-electron-vite/test-build-electron-vite/out/make/squirrel.windows/x64
 
       - name: Display structure of downloaded files
