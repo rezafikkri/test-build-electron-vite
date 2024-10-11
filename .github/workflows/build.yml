@@ -56,7 +56,7 @@ jobs:
       - name: Create Variable
         shell: bash
         run: |
-          winget install jqlang.jq
+          sudo apt install jq
           version=($(jq -r '.version' package.json))
           echo "$version"
 
