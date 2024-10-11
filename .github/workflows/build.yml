@@ -32,7 +32,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: test_build_electron_vite_windows
-          path: /test-build-electron-vite/test-build-electron-vite/out/make/squirrel.windows/x64/RELEASES
+          path: /a/test-build-electron-vite/test-build-electron-vite/out/make/squirrel.windows/x64/RELEASES
 
   build-and-release:
     runs-on: ubuntu-latest
