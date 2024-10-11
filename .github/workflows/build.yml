@@ -25,7 +25,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: build_release
-          path: /home/runner/work/test-build-electron-vite/test-build-electron-vite/out/make/deb/x64/test-build-electron-vite*.deb
+          path: out/make/deb/x64/test-build-electron-vite*.deb
 
   build-and-release:
     runs-on: windows-latest
@@ -43,8 +43,17 @@ jobs:
       - name: Build
         run: npm run make
 
+      - name: Make directory
+        shell: bash
+        run: |
+          cd out/make
+          mkdir deb
+
       - uses: actions/download-artifact@v4
+        with:
+          name: build_release
+          path: out/make/deb/
 
       - name: Display structure of downloaded files
         shell: bash
-        run: ls -R
+        run: ls -R out/make
