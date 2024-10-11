@@ -9,7 +9,7 @@ env:
 jobs:
   build:
     
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - shell: bash
         run: |
@@ -21,11 +21,12 @@ jobs:
           path: math-homework.txt
 
   build-and-release:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/download-artifact@v4
         with:
           name: homework_pre
 
       - name: Display structure of downloaded files
+        shell: bash
         run: ls -R
