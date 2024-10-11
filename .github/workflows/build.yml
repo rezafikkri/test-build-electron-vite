@@ -1,11 +1,30 @@
 name: Build Electron App
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches: [main]
   
 jobs:
   build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Clean install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run make
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build_release
+          path: out/make/deb/x64/test-build-electron-vite*.deb
+
+  build-and-release:
     runs-on: windows-latest
 
     steps:
@@ -21,50 +40,32 @@ jobs:
       - name: Run make
         run: npm run make
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: build_release
-          path: |
-            out/make/squirrel.windows/x64/RELEASES
-            out/make/squirrel.windows/x64/test-build-electron-vite*.exe
-            out/make/squirrel.windows/x64/test_build_electron_vite*.nupkg
-
-  build-and-release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Clean install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run make
-
       - name: Make directory
         shell: bash
-        run: |
-          cd out/make
-          mkdir -p squirrel.windows/x64
+        run: mkdir -p out/make/deb/x64
 
       - uses: actions/download-artifact@v4
         with:
           name: build_release
-          path: out/make/squirrel.windows/x64/
+          path: out/make/deb/x64/
 
       - name: Display structure of downloaded files
         shell: bash
         run: ls -R out/make
 
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        with:
-          draft: true
-          files: |
-            out/make/deb/x64/test-build-electron-vite*.deb
-            out/make/squirrel.windows/x64/RELEASES
-            out/make/squirrel.windows/x64/test-build-electron-vite*.exe
-            out/make/squirrel.windows/x64/test_build_electron_vite*.nupkg
+      - name: Create Variable
+        shell: bash
+        run: |
+          winget install jqlang.jq
+          version=($(jq -r '.version' package.json))
+          echo "$version"
+
+      # - name: Release
+      #   uses: softprops/action-gh-release@v2
+      #   with:
+      #     draft: true
+      #     files: |
+      #       out/make/deb/x64/test-build-electron-vite*.deb
+      #       out/make/squirrel.windows/x64/RELEASES
+      #       out/make/squirrel.windows/x64/test-build-electron-vite*.exe
+      #       out/make/squirrel.windows/x64/test_build_electron_vite*.nupkg
