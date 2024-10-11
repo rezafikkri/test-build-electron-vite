@@ -58,6 +58,7 @@ jobs:
         run: |
           $package = Get-Content 'package.json' | Out-String | ConvertFrom-Json
           echo "APP_VERSION=$package.version" >> $env:GITHUB_ENV
+          echo $env:GITHUB_ENV
       
       - name: Show Variable
         shell: bash
