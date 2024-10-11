@@ -10,25 +10,7 @@ jobs:
   build:
     
     runs-on: windows-latest
-
     steps:
-      - name: see dir before checkout
-        run: dir
-      - uses: actions/checkout@v4
-      - name: see dir after checkout
-        run: dir
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Clean install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run make
-
       - shell: bash
         run: |
           expr 3 + 7 > math-homework.txt
@@ -42,18 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
+        with:
+          name: homework_pre
 
       - name: Display structure of downloaded files
         run: ls -R
-
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Clean install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run make
