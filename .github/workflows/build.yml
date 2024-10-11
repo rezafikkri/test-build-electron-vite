@@ -24,41 +24,48 @@ jobs:
           name: build_release
           path: out/make/deb/x64/test-build-electron-vite*.deb
 
-  build-and-release:
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Clean install dependencies
-        run: npm ci
-
-      - name: Run make
-        run: npm run make
-
-      - name: Make directory
-        shell: bash
-        run: mkdir -p out/make/deb/x64
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: build_release
-          path: out/make/deb/x64/
-
-      - name: Display structure of downloaded files
-        shell: bash
-        run: ls -R out/make
-
       - name: Create Variable
         shell: bash
         run: |
           sudo apt install jq
-          version=($(jq -r '.version' package.json))
-          echo "$version"
+          value=($(jq -r '.version' package.json))
+          echo $value
+
+  # build-and-release:
+  #   runs-on: windows-latest
+  #
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         cache: 'npm'
+  #
+  #     - name: Clean install dependencies
+  #       run: npm ci
+  #
+  #     - name: Run make
+  #       run: npm run make
+  #
+  #     - name: Make directory
+  #       shell: bash
+  #       run: mkdir -p out/make/deb/x64
+  #
+  #     - uses: actions/download-artifact@v4
+  #       with:
+  #         name: build_release
+  #         path: out/make/deb/x64/
+  #
+  #     - name: Display structure of downloaded files
+  #       shell: bash
+  #       run: ls -R out/make
+
+      # - name: Show Variable
+      #   shell: bash
+      #   run: |
+      #     sudo apt install jq
+      #     version=($(jq -r '.version' package.json))
+      #     echo "$version"
 
       # - name: Release
       #   uses: softprops/action-gh-release@v2
