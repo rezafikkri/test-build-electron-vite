@@ -8,24 +8,41 @@ env:
   
 jobs:
   build:
-    
     runs-on: ubuntu-latest
     steps:
-      - shell: bash
-        run: |
-          expr 3 + 7 > math-homework.txt
-      - name: Upload math result for job 1
-        uses: actions/upload-artifact@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          name: homework_pre
-          path: math-homework.txt
+          node-version: 20
+          cache: 'npm'
+
+      - name: Clean install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run make
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build_release
+          path: /home/runner/work/test-build-electron-vite/test-build-electron-vite/out/make/deb/x64/test-build-electron-vite*.deb
 
   build-and-release:
     runs-on: windows-latest
+
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/setup-node@v4
         with:
-          name: homework_pre
+          node-version: 20
+          cache: 'npm'
+
+      - name: Clean install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run make
+
+      - uses: actions/download-artifact@v4
 
       - name: Display structure of downloaded files
         shell: bash
