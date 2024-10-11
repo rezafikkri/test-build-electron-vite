@@ -53,11 +53,16 @@ jobs:
         shell: bash
         run: ls -R out/make
 
-      - name: Show Variable
+      - name: Create Variable
         shell: powershell
         run: |
           $package = Get-Content 'package.json' | Out-String | ConvertFrom-Json
-          $package.version
+          $app_version = "APP_VERSION=$package.version"
+          $app_version | Out-File -Append $GITHUB_ENV
+      
+      - name: Show Variable
+        shell: bash
+        run: echo $APP_VERSION
 
       # - name: Release
       #   uses: softprops/action-gh-release@v2
