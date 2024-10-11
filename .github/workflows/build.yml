@@ -37,14 +37,7 @@ jobs:
   build-and-release:
     runs-on: ubuntu-latest
     steps:
-      - name: create dir
-        run: |
-          cd /home/runner/work/test-build-electron-vite/test-build-electron-vite/out/make
-          mkdir -p squirrel.windows/x64
-
       - uses: actions/download-artifact@v4
-        with:
-          name: test_build_electron_vite_windows
 
       - name: Display structure of downloaded files
         run: ls -R
