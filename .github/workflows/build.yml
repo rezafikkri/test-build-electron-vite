@@ -7,12 +7,48 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
 jobs:
-  build:
-    
-    runs-on: windows-latest
+  # build:
+  #   
+  #   runs-on: windows-latest
+  #
+  #   steps:
+  #     - name: see dir before checkout
+  #       run: dir
+  #     - uses: actions/checkout@v4
+  #     - name: see dir after checkout
+  #       run: dir
+  #
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         cache: 'npm'
+  #
+  #     - name: Clean install dependencies
+  #       run: npm ci
+  #
+  #     - name: Build
+  #       run: npm run make
+  #
+  #     - name: see artifact
+  #       run: |
+  #         D:
+  #         cd \a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64
+  #         dir
+  #
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: windows-build
+  #         path: |
+  #           D:\a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\test-build-electron-vite*.exe
+  #           D:\a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\test-build-electron-vite*.nupkg
+  #           D:\a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\RELEASES
+
+  build-and-release:
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -21,20 +57,5 @@ jobs:
       - name: Clean install dependencies
         run: npm ci
 
-      - name: Buil
+      - name: Build
         run: npm run make
-
-      - name: see artifact
-        run: |
-          D:
-          cd \a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64
-          dir
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: windows-build
-          path: |
-            D:\a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\test-build-electron-vite*.exe
-            D:\a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\test-build-electron-vite*.nupkg
-            D:\a\test-build-electron-vite\test-build-electron-vite\out\make\squirrel.windows\x64\RELEASES
-
