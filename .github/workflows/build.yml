@@ -40,6 +40,9 @@ jobs:
       - name: Clean install dependencies
         run: npm ci
 
+      - name: Run make
+        run: npm run make
+
       - name: Make directory
         shell: bash
         run: mkdir -p out/make/deb/x64
