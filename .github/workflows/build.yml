@@ -56,7 +56,7 @@ jobs:
       - name: Show Variable
         shell: powershell
         run: |
-          $package = [PackageObject](Get-Content 'package.json' | Out-String | ConvertFrom-Json)
+          $package = Get-Content 'package.json' | Out-String | ConvertFrom-Json
           $package.version
 
       # - name: Release
