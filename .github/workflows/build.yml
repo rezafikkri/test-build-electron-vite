@@ -57,8 +57,7 @@ jobs:
         shell: powershell
         run: |
           $package = Get-Content 'package.json' | Out-String | ConvertFrom-Json
-          $app_version = "APP_VERSION=$package.version"
-          $app_version | Out-File $GITHUB_ENV
+          echo "APP_VERSION=$package.version" >> $env:GITHUB_ENV
       
       - name: Show Variable
         shell: bash
