@@ -47,13 +47,16 @@ jobs:
         shell: bash
         run: |
           cd out/make
-          mkdir deb
+          mkdir -p deb/x64
 
       - uses: actions/download-artifact@v4
         with:
           name: build_release
-          path: out/make/deb/
+          path: out/make/deb/x64/
 
       - name: Display structure of downloaded files
         shell: bash
         run: ls -R out/make
+
+      - name: Release All
+        run: npm run publish
