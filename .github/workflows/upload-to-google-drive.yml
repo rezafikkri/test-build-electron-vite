@@ -1,7 +1,11 @@
 name: Upload to Google Drive
 on:
-  release:
-    types: [published]
+  push:
+    branches: [main]
+
+# on:
+#   release:
+#     types: [published]
 
 jobs:
   download-and-uploading:
@@ -23,7 +27,7 @@ jobs:
         with:
           github_token: ${{ env.GITHUB_TOKEN }}
           name: upload_to_google_drive
-          run_id: ${{ env.RUNID }}
+          run-id: ${{ env.RUNID }}
 
       - name: Display structure of downloaded files
         run: ls -R
