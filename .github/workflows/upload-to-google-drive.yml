@@ -1,11 +1,7 @@
 name: Upload to Google Drive
 on:
-  push:
-    branches: [main]
-
-# on:
-#   release:
-#     types: [published]
+  release:
+    types: [published]
 
 jobs:
   download-and-uploading:
