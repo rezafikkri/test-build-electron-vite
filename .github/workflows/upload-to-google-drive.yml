@@ -15,12 +15,12 @@ jobs:
       - name: Get Build Workflow Run Id
         shell: bash
         run: |
-          RUNID=$(gh api repos/$OWNER/$REPO/commits/$COMMIT_SHA/check-runs | jq -r '.check_runs[] | select(.name == "Build Electron App") | .html_url | capture("/runs/(?<number>[0-9]+)/jobs") | .number' | sed 's/"//g' | head -n 1)
-          echo RUNID >> $GITHUB_ENV
+          RUNID=$(gh run list --repo rezafikkri/test-build-electron-vite --json databaseId --workflow=build.yml --limit 1 | jq '.[0].databaseId')
+          echo "RUNID=$RUNID" >> $GITHUB_ENV
 
       - uses: actions/download-artifact@v4
         with:
-          github_token: ${{ env.GH_TOKEN }}
+          github_token: ${{ env.GITHUB_TOKEN }}
           name: upload_to_google_drive
           run_id: ${{ env.RUNID }}
 
