@@ -1,0 +1,28 @@
+name: Upload to Google Drive
+on:
+  release:
+    types: [published]
+
+jobs:
+  download-and-uploading:
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        
+      - name: Get Build Workflow Run Id
+        shell: bash
+        run: |
+          RUNID=$(gh api repos/$OWNER/$REPO/commits/$COMMIT_SHA/check-runs | jq -r '.check_runs[] | select(.name == "Build Electron App") | .html_url | capture("/runs/(?<number>[0-9]+)/jobs") | .number' | sed 's/"//g' | head -n 1)
+          echo RUNID >> $GITHUB_ENV
+
+      - uses: actions/download-artifact@v4
+        with:
+          github_token: ${{ env.GH_TOKEN }}
+          name: upload_to_google_drive
+          run_id: ${{ env.RUNID }}
+
+      - name: Display structure of downloaded files
+        run: ls -R

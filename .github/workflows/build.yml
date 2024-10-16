@@ -74,3 +74,12 @@ jobs:
             out/make/squirrel.windows/x64/RELEASES
             out/make/squirrel.windows/x64/test-build-electron-vite*.exe
             out/make/squirrel.windows/x64/test_build_electron_vite*.nupkg
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: upload_to_google_drive
+          path: |
+            out/make/deb/x64/test-build-electron-vite*.deb
+            out/make/squirrel.windows/x64/RELEASES
+            out/make/squirrel.windows/x64/test-build-electron-vite*.exe
+            out/make/squirrel.windows/x64/test_build_electron_vite*.nupkg
