@@ -37,17 +37,17 @@ jobs:
         shell: bash
         run: echo "APP_VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
 
-      # - name: Upload Windows Artifacts TO Google Drive
-      #   uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
-      #   with:
-      #     target: |
-      #       release/squirrel.windows/x64/RELEASES
-      #       release/squirrel.windows/x64/test-build-electron-vite-1.10.0 Setup.exe
-      #       release/squirrel.windows/x64/test_build_electron_vite-1.10.0-full.nupkg
-      #     credentials: ${{ secrets.G_SERVICE_CREDENTIAL }}
-      #     parent_folder_id: ${{ env.PARENT_FOLDER_ID }}
-      #     child_folder: ${{ env.APP_VERSION }}/windows
-      #     override: true
+      - name: Upload Windows Artifacts TO Google Drive
+        uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
+        with:
+          target: |
+            release/squirrel.windows/x64/RELEASES
+            release/squirrel.windows/x64/test-build-electron-vite-${{ env.APP_VERSION }} Setup.exe
+            release/squirrel.windows/x64/test_build_electron_vite-${{ env.APP_VERSION }}-full.nupkg
+          credentials: ${{ secrets.G_SERVICE_CREDENTIAL }}
+          parent_folder_id: ${{ env.PARENT_FOLDER_ID }}
+          child_folder: v${{ env.APP_VERSION }}
+          override: true
 
       - name: Upload Linux Artifacts TO Google Drive
         uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
@@ -55,6 +55,6 @@ jobs:
           target: release/deb/x64/test-build-electron-vite_${{ env.APP_VERSION }}_amd64.deb
           credentials: ${{ secrets.G_SERVICE_CREDENTIAL }}
           parent_folder_id: ${{ env.PARENT_FOLDER_ID }}
-          child_folder: ${{ env.APP_VERSION }}/Linux
+          child_folder: v${{ env.APP_VERSION }}
           override: true
 
