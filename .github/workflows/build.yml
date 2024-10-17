@@ -25,6 +25,7 @@ jobs:
           path: out/make/deb/x64/test-build-electron-vite*.deb
 
   build-and-release:
+    needs: build
     runs-on: windows-latest
 
     steps:
