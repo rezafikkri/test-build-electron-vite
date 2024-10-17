@@ -37,18 +37,17 @@ jobs:
         shell: bash
         run: echo "APP_VERSION=$(jq '.version' package.json)" >> $GITHUB_ENV
 
-      - name: Upload Windows Artifacts TO Google Drive
-        uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
-        with:
-          target: |
-            release/squirrel.windows/x64/RELEASES
-            release/squirrel.windows/x64/test-build-electron-vite-1.10.0 Setup.exe
-            release/squirrel.windows/x64/test_build_electron_vite-1.10.0-full.nupkg
-          credentials: ${{ secrets.G_SERVICE_CREDENTIAL }}
-          parent_folder_id: ${{ env.PARENT_FOLDER_ID }}
-          child_folder: ${{ env.APP_VERSION }}/windows
-          override: true
-          owner: fikkri.reza@gmail.com
+      # - name: Upload Windows Artifacts TO Google Drive
+      #   uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
+      #   with:
+      #     target: |
+      #       release/squirrel.windows/x64/RELEASES
+      #       release/squirrel.windows/x64/test-build-electron-vite-1.10.0 Setup.exe
+      #       release/squirrel.windows/x64/test_build_electron_vite-1.10.0-full.nupkg
+      #     credentials: ${{ secrets.G_SERVICE_CREDENTIAL }}
+      #     parent_folder_id: ${{ env.PARENT_FOLDER_ID }}
+      #     child_folder: ${{ env.APP_VERSION }}/windows
+      #     override: true
 
       - name: Upload Linux Artifacts TO Google Drive
         uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
@@ -58,5 +57,4 @@ jobs:
           parent_folder_id: ${{ env.PARENT_FOLDER_ID }}
           child_folder: ${{ env.APP_VERSION }}/Linux
           override: true
-          owner: fikkri.reza@gmail.com
 
