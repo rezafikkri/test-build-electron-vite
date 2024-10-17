@@ -1,7 +1,7 @@
 {
   "name": "test-build-electron-vite",
   "productName": "test-build-electron-vite",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "description": "My Electron application description",
   "main": ".vite/build/main.js",
   "scripts": {

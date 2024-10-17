@@ -7,6 +7,7 @@ jobs:
   download-and-uploading:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PARENT_FOLDER_ID: 1jn2NjBBRHY0cR4xrd9pLjUUFr5QjScEv
     
     runs-on: ubuntu-latest
     steps:
@@ -31,3 +32,31 @@ jobs:
 
       - name: Display structure of downloaded files
         run: ls -R
+
+      - name: Get App Version
+        shell: bash
+        run: echo "APP_VERSION=$(jq '.version' package.json)" >> $GITHUB_ENV
+
+      - name: Upload Windows Artifacts TO Google Drive
+        uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
+        with:
+          target: |
+            release/squirrel.windows/x64/RELEASES
+            release/squirrel.windows/x64/test-build-electron-vite-1.10.0 Setup.exe
+            release/squirrel.windows/x64/test_build_electron_vite-1.10.0-full.nupkg
+          credentials: ${{ secrets.G_SERVICE_CREDENTIAL }}
+          parent_folder_id: ${{ env.PARENT_FOLDER_ID }}
+          child_folder: ${{ env.APP_VERSION }}/windows
+          override: true
+          owner: fikkri.reza@gmail.com
+
+      - name: Upload Linux Artifacts TO Google Drive
+        uses: Jumbo810/Upload_Github_Artifacts_TO_GDrive@v2.2.2
+        with:
+          target: release/deb/x64/test-build-electron-vite_1.10.0_amd64.deb
+          credentials: ${{ secrets.G_SERVICE_CREDENTIAL }}
+          parent_folder_id: ${{ env.PARENT_FOLDER_ID }}
+          child_folder: ${{ env.APP_VERSION }}/Linux
+          override: true
+          owner: fikkri.reza@gmail.com
+
